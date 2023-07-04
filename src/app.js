@@ -2,7 +2,6 @@ import express from "express";
 import displayRoutes from "express-routemap";
 import handlebars from "express-handlebars";
 import __dirname from "./utils.js";
-//import { NODE_ENV, PORT, API_VERSION } from "./config/config.js";
 import  connectDB from "./db/mongo.config.js";
 
 

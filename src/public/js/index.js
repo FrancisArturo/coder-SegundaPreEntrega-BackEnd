@@ -1,4 +1,4 @@
-const socket = io();
+
 
 const formAdd = document.getElementById("formAdd");
 const formEdit = document.getElementById("formEdit");
@@ -13,6 +13,9 @@ const addProductCategory = document.getElementById("productCategory");
 const addProductStatus = document.getElementById("productStatus");
 const addProductCode = document.getElementById("productCode");
 const addBtn = document.getElementById("botonAdd");   
+//const addCartBtn = document.getElementById("botonAgregarCarrito");
+const addCartBtns = document.getElementsByClassName("botonAgregarCarrito");
+const idProduct = document.getElementById("idProduct").innerText;
 
 
 
@@ -33,7 +36,17 @@ async function addProduct(product) {
     const data = await res.json();
     return data;
 }
-
+async function addCartProduct(bid) {
+    const res = await fetch(`/api/v1/products/64a44f138c5802640f24284/${{bid}}`, {
+        method: "POST",
+        body: JSON.stringify(),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    const data = await res.json();
+    return data;
+}
 
 addBtn.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -48,7 +61,6 @@ addBtn.addEventListener("click", async (e) => {
         code: addProductCode.value,
     };
     await addProduct(product);
-    //socket.emit("addProduct", product);
     addProductTitle.value = "";
     addProductPrice.value = "";
     addProductDescription.value = "";
@@ -58,21 +70,15 @@ addBtn.addEventListener("click", async (e) => {
     addProductCode.value = "";
 });
 
-// socket.on("productAdded", (data) => {
-//     if (data.error) {
-//         alert(data.error);
-//     } else {
-//         productContainer.innerHTML += `
-//         <div>
-//             <h3> ${data.title} </h3>
-//             <p>description: ${data.description} </p>
-//             <p>code: ${data.code} </p>
-//             <p>price: ${data.price}</p>
-//             <p>status: ${data.status} </p>
-//             <p>category: ${data.category}</p>
-//             <p>stock: ${data.stock}</p>
-//         </div>
-//         `;
-//     }
-// });
+
+addCartBtns.forEach(element => {
+    element.addEventListener("click", async (e) => {
+        e.preventDefault();
+        console.log("hola");
+    });
+});
+
+
+
+
 

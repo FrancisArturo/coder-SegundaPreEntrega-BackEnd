@@ -15,7 +15,7 @@ export default class productsRoutes {
 
     initializeRoutes() {
         this.router.get(`${this.path}`, async (req, res) => {
-            const { limit = 10, page = 1, category = "all", sort = -1  } = req.query;
+            const { limit = 10, page = 1, category = "all", sort = undefined  } = req.query;
             try {
                 const { docs, hasPrevPage, hasNextPage, nextPage, prevPage } = await this.productsManager.getallProducts(limit, page, category, sort);
                 res.render("home", { products : docs, hasPrevPage, hasNextPage, nextPage, prevPage, page, limit, category, sort });
