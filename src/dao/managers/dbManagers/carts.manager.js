@@ -94,6 +94,21 @@ export default class CartsManager {
         }
         return "Product not found";
     }
+    updateProductsCart = async (id, products) => {
+        const cart = await cartModel.findById(id);
+        if (!cart) {
+            return "Cart not found";
+        }
+        for (let obj in products) {
+            const productInList = await productsModel.findById(products[obj].product);
+            if (!productInList) {
+                return "Product not found";
+            }
+        }
+        cart.products = products;
+        await cart.save();
+        return cart;
+    }
 }
 
 

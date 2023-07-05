@@ -119,7 +119,7 @@ export default class cartRoutes {
             }
         }
         );
-        //update product from cart
+        //update quantity product from cart
         this.router.put(`${this.path}/:cid/products/:pid`, async (req, res) => {
             try {
                 const { cid, pid } = req.params;
@@ -146,5 +146,31 @@ export default class cartRoutes {
             }
         }
         );
+        //update products from cart
+        this.router.put(`${this.path}/:cid`, async (req, res) => {
+            try {
+                const { cid } = req.params;
+                const products = req.body;
+                const cart = await this.cartManager.updateProductsCart(cid, products);
+                if (cart === "Cart not found") {
+                    return res.json({
+                        message: "Cart not found",
+                        data: cart
+                    })
+                }
+                if (cart === "Product not found") {
+                    return res.json({
+                        message: "Some of the products are not found",
+                        data: cart
+                    })
+                }
+                return res.json({
+                    message: "Cart updated successfully",
+                    data: cart
+                })
+            } catch (error) {
+                res.status(400).json({ message: error.message });
+            }
+        } ); 
     }
 }

@@ -15,6 +15,7 @@ export default class productsRoutes {
 
     initializeRoutes() {
         this.router.get(`${this.path}`, async (req, res) => {
+            //uso como query para buscar productos por categoria: frutas, lacteos o panificados
             const { limit = 10, page = 1, category = "all", sort = undefined  } = req.query;
             try {
                 const { docs, hasPrevPage, hasNextPage, nextPage, prevPage } = await this.productsManager.getallProducts(limit, page, category, sort);
