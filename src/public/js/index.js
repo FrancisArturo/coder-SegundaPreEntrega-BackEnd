@@ -13,8 +13,6 @@ const addProductCategory = document.getElementById("productCategory");
 const addProductStatus = document.getElementById("productStatus");
 const addProductCode = document.getElementById("productCode");
 const addBtn = document.getElementById("botonAdd");   
-//const addCartBtn = document.getElementById("botonAgregarCarrito");
-const addCartBtns = document.getElementsByClassName("botonAgregarCarrito");
 const idProduct = document.getElementById("idProduct").innerText;
 
 
@@ -36,15 +34,13 @@ async function addProduct(product) {
     const data = await res.json();
     return data;
 }
-async function addCartProduct(bid) {
-    const res = await fetch(`/api/v1/products/64a44f138c5802640f24284/${{bid}}`, {
+const  addCartProduct = async (pid) => {
+    //id del carrito harcodeado
+    const res = await fetch(`/api/v1/carts/64a44f138c5802640f242847/products/${pid}`, {
         method: "POST",
-        body: JSON.stringify(),
-        headers: {
-            "Content-Type": "application/json",
-        },
     });
     const data = await res.json();
+    alert(data.message);
     return data;
 }
 
@@ -71,12 +67,6 @@ addBtn.addEventListener("click", async (e) => {
 });
 
 
-addCartBtns.forEach(element => {
-    element.addEventListener("click", async (e) => {
-        e.preventDefault();
-        console.log("hola");
-    });
-});
 
 
 

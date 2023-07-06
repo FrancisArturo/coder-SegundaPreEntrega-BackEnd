@@ -20,8 +20,7 @@
                 <p>category: {{this.category}}</p>
                 <p>stock: {{this.stock}} </p>
                 <p id="idProduct">id: {{this.id}}</p>
-                {{!-- hacer funcionar el boton de agregar al carrito --}}
-                {{!-- <button type="button" id={{this.id}} class="botonAgregarCarrito">Agregar al carrito</button> --}}
+                <button type="button" onclick="addCartProduct('{{this.id}}')" class="botonAgregarCarrito">Agregar al carrito</button>
             </div>
         {{/each }} 
     
