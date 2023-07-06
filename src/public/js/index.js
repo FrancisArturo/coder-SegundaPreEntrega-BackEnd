@@ -34,13 +34,30 @@ async function addProduct(product) {
     const data = await res.json();
     return data;
 }
-const  addCartProduct = async (pid) => {
-    //id del carrito harcodeado
-    const res = await fetch(`/api/v1/carts/64a44f138c5802640f242847/products/${pid}`, {
+
+const createNewCart = async () => {
+    const res = await fetch("/api/v1/carts", {
         method: "POST",
     });
     const data = await res.json();
-    alert(data.message);
+    cartId = data.data._id;
+    // id del cart en el sessionStorage
+    sessionStorage.setItem("cartId", cartId);
+    return cartId;   
+}
+
+const  addCartProduct = async (pid) => {
+    let cartId = sessionStorage.getItem("cartId");
+    if (!cartId) {
+        cartId = await createNewCart();
+    }
+    const res = await fetch(`/api/v1/carts/${cartId}/products/${pid}`, {
+        method: "POST",
+    });
+    const data = await res.json();
+    if (data.message === "Product added successfully") {
+        alert("Producto agregado al carrito n° " + cartId);
+    }
     return data;
 }
 
