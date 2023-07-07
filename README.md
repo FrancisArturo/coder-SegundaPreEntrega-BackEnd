@@ -59,7 +59,7 @@ CARTS
 Devolverá todos los productos del carrito cuya id fue pasada en cid renderizados en una vista donde se verá la información de cada uno de ellos. 
 Debe dar error si la id pasada no corresponde a ningun carrito en la DB.
 
-2. Métoto POST
+2. Método POST
 2.1 http://localhost:8000/api/v1/carts/cid/products/pid
 Debe agregar el producto cuya id fue pasada en pid al carrito cuya id fue pasada en cid.
 Debe dar error si la cid no corresponde a ningun carrito en la DB.
